@@ -51,6 +51,7 @@ button {
   cursor: pointer;
   font-weight: bold;
   padding: 10px;
+  margin-top: 10px;
 }
 
 button:hover {
@@ -68,3 +69,26 @@ button:hover {
   color: #fd9c9c;
 }
 
+.answer-holder {
+  display: grid;
+  grid-template-columns: repeat(2,auto);
+  column-gap: 5px;
+  row-gap: 10px;
+  
+}
+
+label {
+  border: 2px solid #4f7d5d;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+  grid-column: 1;
+}
+
+input[type='radio'] {
+  grid-column: 2;
+  height: 20px;
+  width: 20px;
+}

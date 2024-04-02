@@ -49,16 +49,45 @@ function makeQuestions(arrOfQuestions) {
                 const question = document.createElement('p');
                 question.innerHTML = item.question;
 
+                
+                
+                
+                const correctAnswer = document.createElement('input');
+                correctAnswer.setAttribute('type', 'radio');
+                correctAnswer.setAttribute('id', item.correct_answer);
+                correctAnswer.setAttribute('name', 'answer')
+                
+                const correctLabel = document.createElement('label');
+                correctLabel.setAttribute('for', item.correct_answer);
+                correctLabel.innerHTML = `${item.correct_answer}`
+                
+                
                 const answerButton = document.createElement('button');
                 answerButton.textContent = 'Show Answer';
                 answerButton.addEventListener('click', () => {
-                    answer.classList.toggle('hidden');
+                    correctLabel.style['background-color'] = '#b5fbca';
                 })
 
-                const answer = document.createElement('p');
-                answer.setAttribute('class', 'hidden');
-                answer.textContent = item.correct_answer;
-            
+                const answerList = document.createElement('section');
+                answerList.setAttribute('class', 'answer-holder')
+
+                    item.incorrect_answers.forEach(choice => {
+
+                        const answerRadio = document.createElement('input');
+                        answerRadio.setAttribute('type', 'radio');
+                        answerRadio.setAttribute('id', choice);
+                        answerRadio.setAttribute('name', 'answer')
+
+                        const answerLabel = document.createElement('label')
+                        answerLabel.setAttribute('for', choice);
+                        answerLabel.innerHTML = `${choice}`;
+
+                        
+                        answerList.append(answerLabel, answerRadio);
+                    })
+
+                answerList.append(correctLabel, correctAnswer);
+
                 if(difficulty == 'medium') {
                     card.style.border = '3px solid #c5c862';
                     answerButton.style.background = '#c5c862';
@@ -93,7 +122,7 @@ function makeQuestions(arrOfQuestions) {
                     })
                 }
 
-            card.append(category, question, answerButton, answer );
+            card.append(category, question, answerList, answerButton);
         
         main.appendChild(card);
 
